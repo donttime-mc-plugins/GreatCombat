@@ -8,7 +8,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.inventory.ItemStack;
 import ru.boomearo.langhelper.LangHelper;
-import ru.boomearo.langhelper.versions.LangType;
+import ru.boomearo.langhelper.api.LangType;
 
 import java.lang.reflect.Method;
 import java.text.MessageFormat;

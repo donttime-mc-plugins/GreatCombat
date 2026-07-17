@@ -172,9 +172,9 @@
     <dependency>
       <groupId>ru.boomearo</groupId>
       <artifactId>LangHelper</artifactId>
-      <version>1.5.18</version>
+      <version>1.7.0</version>
       <scope>system</scope>
-      <systemPath>${project.basedir}/libs/LangHelper-1.5.18.jar</systemPath>
+      <systemPath>${project.basedir}/libs/LangHelper.jar</systemPath>
     </dependency>
   </dependencies>
   <properties>
