@@ -4,6 +4,7 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import dev.enco.greatcombat.api.events.*;
 import dev.enco.greatcombat.api.managers.ICombatManager;
+import dev.enco.greatcombat.api.managers.IPowerupsManager;
 import dev.enco.greatcombat.api.managers.IScoreboardManager;
 import dev.enco.greatcombat.api.managers.ITaskManager;
 import dev.enco.greatcombat.api.models.IUser;
@@ -29,6 +30,7 @@ public class CombatManager implements ICombatManager {
     private final IScoreboardManager scoreboardManager;
     private final ITaskManager taskManager;
     private final ConfigManager configManager;
+    private final IPowerupsManager powerupsManager;
 
     /**
      * Stops all active combat modes
@@ -142,6 +144,7 @@ public class CombatManager implements ICombatManager {
         UUID playerUUID = player.getUniqueId();
         IUser user = getOrCreateUser(playerUUID);
         user.refresh(System.currentTimeMillis());
+        powerupsManager.disablePowerups(player, configManager.getPowerups().disablingDamagerPowerups());
     }
 
     /**
