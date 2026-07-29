@@ -92,6 +92,7 @@ public class PlayerListener implements Listener {
     )
     public void onPreprocess(PlayerCommandPreprocessEvent e) {
         var player = e.getPlayer();
+        handleAdminTeleportCommand(player, e.getMessage());
         if (player.hasPermission("greatcombat.commands.bypass")) return;
         handlePlayerCommand(player, e.getMessage(), e);
         var uuid = player.getUniqueId();
@@ -118,6 +119,23 @@ public class PlayerListener implements Listener {
                 e.setCancelled(true);
             }
         }
+    }
+
+    private void handleAdminTeleportCommand(Player sender, String message) {
+        if (!sender.hasPermission("greatcombat.teleports.bypass")) return;
+        String[] args = message.substring(1).split(" ");
+        stopCombatIfNeeded(sender);
+        for (String arg : args) {
+            Player target = Bukkit.getPlayer(arg);
+            if (target != null) stopCombatIfNeeded(target);
+        }
+    }
+
+    private void stopCombatIfNeeded(Player player) {
+        var uuid = player.getUniqueId();
+        if (!combatManager.isInCombat(uuid)) return;
+        var user = combatManager.getUser(uuid);
+        if (user != null) combatManager.stopCombat(user);
     }
 
     private boolean matchSubcommands(String command, String subCommand, Commands commands) {
